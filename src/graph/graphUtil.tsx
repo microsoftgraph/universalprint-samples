@@ -4,7 +4,9 @@
 import { hostUrl, IGraphPrinterSharesResponse, IPrinterShare, IPrintJobStatus, IPrintJob, IDocumentConfiguration, IPrintDocument } from "./graphModel";
 
 
-
+/** Invokes List Print Shares Microsoft Graph API and returns list of user PrinterShares.
+ * @returns List of printershares objects.
+ */
 export const getPrinterShares = async (authToken: string): Promise<IPrinterShare[]> => {
     const listPrintsRequestInit = {
         method: 'GET',
@@ -23,6 +25,9 @@ export const getPrinterShares = async (authToken: string): Promise<IPrinterShare
     return printShares;
 }
 
+/** Invokes CreatePrintJob Microsoft Graph API and returns a IPrintJob object
+ *  @return IPrintJob which includes JobID and document Id created by universal print 
+ * */
 export const createJob = async (printerId: string, sizeInBytes: number, documentConfig: IDocumentConfiguration, authToken: string): Promise<IPrintJob> => {
     let url = `${hostUrl}/print/shares/${printerId}/jobs`;
 
@@ -56,6 +61,8 @@ export const createJob = async (printerId: string, sizeInBytes: number, document
     }
 }
 
+/** Invokes Upload Document Microsoft Graph API 
+ * @returns Response. if successful it will 201/202 response codes */
 export const uploadData = async (printerId: string, job: IPrintJob, authToken: string, array: Uint8Array): Promise<Response> => {
 
     const url = `${hostUrl}/print/shares/${printerId}/jobs/${job.id}/documents/${job.documents[0].id}/uploadData`;
@@ -79,6 +86,9 @@ export const uploadData = async (printerId: string, job: IPrintJob, authToken: s
     }
 }
 
+/** Invokes Start Print Job Microsoft Graph API to notify universal print to start printing
+ * @returns IPrintJobStatus which contains the current status of the job
+ */
 export const startPrintJob = async (printerId: string, jobId: string, authToken: string): Promise<IPrintJobStatus> => {
 
     const url = `${hostUrl}/print/shares/${printerId}/jobs/${jobId}/startPrintJob`;

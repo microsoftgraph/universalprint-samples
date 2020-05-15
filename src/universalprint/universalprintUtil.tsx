@@ -6,7 +6,11 @@ import { IPrinterCapabilities, IPrinterDefaults, IDocumentConfiguration, IPrintO
 import { IPrinterSettings, ISelectedConfig, IPrintSettingsState, PrintingState, IChangeEvent, Action } from "./universalprintModel";
 import { getPrinterShares, createJob, uploadData, startPrintJob } from "../graph/graphUtil";
 
-
+/**
+ * Fetchs list of User printershares and generate the print dialog initial state with it
+ * @param authToken user access Token
+ * @param dispatch Dispatcher to update Print Dialog State
+ */
 export const initilizePrintSettings = async (authToken: string, dispatch: React.Dispatch<IChangeEvent>) => {
     try {
         const printShares = await getPrinterShares(authToken);
@@ -32,6 +36,12 @@ export const initilizePrintSettings = async (authToken: string, dispatch: React.
     }
 };
 
+/**
+ * Submits the printJob to Universal Print
+ * @param selectedData User print job selections
+ * @param authToken User access Token
+ * @param dispatch Reducer for print dialog state
+ */
 export const SubmitPrintJob = async (selectedData: ISelectedConfig, authToken: string, dispatch: React.Dispatch<IChangeEvent>) => {
     if (selectedData.file) {
         const reader = new FileReader();
@@ -61,6 +71,11 @@ export const SubmitPrintJob = async (selectedData: ISelectedConfig, authToken: s
     }
 };
 
+/**
+ * Updates the Print dialog state based on the ChangeEvent
+ * @param prevState Previous PrintDialog state
+ * @param param1 ChangeEvent
+ */
 export const onChangeState = (prevState: IPrintSettingsState, { action, value }: IChangeEvent): IPrintSettingsState => {
     if (action === Action.ChangePrintSettings) {
         return value as IPrintSettingsState;
@@ -95,6 +110,7 @@ export const onChangeState = (prevState: IPrintSettingsState, { action, value }:
     }
 };
 
+// static data 
 export const initialState: IPrintSettingsState = {
     selectedData: {},
     settings: {},
@@ -126,6 +142,10 @@ export const StaticPrintSettings: IPrintSettingsState = {
     }
 };
 
+/**
+ * Create Print dialog options data from the Printer Capabilities
+ * @param capabilities Printer capabilities
+ */
 export const convertToPrinterSettings = (capabilities: IPrinterCapabilities | undefined): IPrinterSettings => {
 
     const printerOptions: IPrinterSettings = {}
@@ -155,6 +175,11 @@ export const printerComparer = (option1: IDropdownOption, option2: IDropdownOpti
     } else { return 0; }
 };
 
+/**
+ * Create Default selections based on the printer default settings
+ * @param printerId selected printer ID
+ * @param defaults printer default preferences 
+ */
 export const convertToSelectedConfig = (printerId: string, defaults: IPrinterDefaults): ISelectedConfig => {
     const ret: ISelectedConfig = {
         printer: printerId,
@@ -166,6 +191,10 @@ export const convertToSelectedConfig = (printerId: string, defaults: IPrinterDef
     return ret;
 }
 
+/**
+ * Creates DocumentConfiguration object from the user configured print job settings
+ * @param selData print job settings
+ */
 export const convertToDocumentConfig = (selData: ISelectedConfig): IDocumentConfiguration => {
     const temp: IDocumentConfiguration = { copies: 1 };
     if (selData.copies) {
