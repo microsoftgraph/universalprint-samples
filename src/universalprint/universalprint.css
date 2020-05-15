@@ -1,0 +1,38 @@
+.error {
+    color: red;
+}
+
+.universalPrintcontainer {
+    display: flex;
+    border: 5px medium grey;
+    flex-flow: column nowrap;
+    min-width: 300px;
+    min-height: 350px;
+    padding: 10px;
+}
+
+.scrollableClass {
+    display: flex;
+    flex-flow: column nowrap;
+    min-width: 350px;
+    min-height: 450px;
+}
+
+.printerOptions {
+    width: 200px;
+}
+
+.stateStack {
+    flex-grow: 1;
+}
+
+.state {
+    width: 100%;
+    height: 100%;
+}
+
+.universalPrintCancelIcon {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
