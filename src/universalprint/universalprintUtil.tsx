@@ -7,7 +7,7 @@ import { IPrinterSettings, ISelectedConfig, IPrintSettingsState, PrintingState, 
 import { getPrinterShares, createJob, uploadData, startPrintJob } from "../graph/graphUtil";
 
 /**
- * Fetchs list of User printershares and generate the print dialog initial state with it
+ * Gets a list of User shared printers from universal print and creates print dialog initial state
  * @param authToken user access Token
  * @param dispatch Dispatcher to update Print Dialog State
  */
@@ -37,7 +37,7 @@ export const initilizePrintSettings = async (authToken: string, dispatch: React.
 };
 
 /**
- * Submits the printJob to Universal Print
+ * Submits a printJob to Universal Print
  * @param selectedData User print job selections
  * @param authToken User access Token
  * @param dispatch Reducer for print dialog state
@@ -110,7 +110,6 @@ export const onChangeState = (prevState: IPrintSettingsState, { action, value }:
     }
 };
 
-// static data 
 export const initialState: IPrintSettingsState = {
     selectedData: {},
     settings: {},
@@ -143,7 +142,7 @@ export const StaticPrintSettings: IPrintSettingsState = {
 };
 
 /**
- * Create Print dialog options data from the Printer Capabilities
+ * Creates Print dialog options from the Printer Capabilities
  * @param capabilities Printer capabilities
  */
 export const convertToPrinterSettings = (capabilities: IPrinterCapabilities | undefined): IPrinterSettings => {
@@ -176,7 +175,7 @@ export const printerComparer = (option1: IDropdownOption, option2: IDropdownOpti
 };
 
 /**
- * Create Default selections based on the printer default settings
+ * Creates print setting dialog default selections based on the printer default settings
  * @param printerId selected printer ID
  * @param defaults printer default preferences 
  */
@@ -192,21 +191,21 @@ export const convertToSelectedConfig = (printerId: string, defaults: IPrinterDef
 }
 
 /**
- * Creates DocumentConfiguration object from the user configured print job settings
+ * Creates Universal print DocumentConfiguration object from the user selections in print settings dialog
  * @param selData print job settings
  */
 export const convertToDocumentConfig = (selData: ISelectedConfig): IDocumentConfiguration => {
-    const temp: IDocumentConfiguration = { copies: 1 };
+    const documentConfig: IDocumentConfiguration = { copies: 1 };
     if (selData.copies) {
-        temp.copies = selData.copies;
+        documentConfig.copies = selData.copies;
     }
     if (selData.orientation) {
-        temp.orientation = selData.orientation as IPrintOrientation;
+        documentConfig.orientation = selData.orientation as IPrintOrientation;
     }
 
     if (selData.colorConfig) {
-        temp.colorConfiguration = selData.colorConfig as IPrintColorConfiguration;
+        documentConfig.colorConfiguration = selData.colorConfig as IPrintColorConfiguration;
     }
 
-    return temp;
+    return documentConfig;
 };
