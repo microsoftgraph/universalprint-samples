@@ -16,28 +16,6 @@ Before using this sample, you need to onboard to [`universal print](https://docs
 2. Run `npm run build` to build the sample.
 3. Run `npm start`. This will launch the sample application in your browser (if not, navigate to http://localhost:3000).
 
-
-## Steps to enable Cloud based printing 
-
-### Getting Printer Information from Universal Print
-1. Go to ./src/universalprint/universalprint.tsx
-2. uncomment line 22 which is
-            `// initilizePrintSettings(authToken, dispatch);`
-3. comment line 23 which is 
-            `dispatch({ action: Action.ChangePrintSettings, value: StaticPrintSettings });`
-4. uncomment below code block in line 94
-            `/* onChange={onPrinterOptionsChange} */`
-4. `npm run build` to rebuild the sample
-5. `npm start` to launch the sample application.
-
-### Submit Print Job to Universal Print
-1.Go to ./src/universalprint/universalprint.tsx
-2. uncomment below code block in line 110
-            `/* onClick={onSubmit} */`
-3. `npm run build` to rebuild the sample
-4. `npm start` to launch the sample application.
-
-
 ## Additional  Information
 This sample has dependency on [`@azure/msal-browser`](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser) and [`@fluentui/react`](https://github.com/microsoft/fluentui) packages. 
 

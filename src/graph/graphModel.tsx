@@ -8,15 +8,15 @@ export interface IGraphPrinterCapabilitiesResponse {
 }
 
 export interface IPrinterCapabilities {
-    supportedCopiesPerJob: IIntegerRange;
-    supportedOrientations: IPrintOrientation[];
-    supportedColorConfigurations: IPrintColorConfiguration[];
+    copiesPerJob?: IIntegerRange;
+    orientations?: IPrintOrientation[];
+    colorModes?: IPrintColorConfiguration[];
 }
 
 export interface IPrinterDefaults {
-    copiesPerJob: number;
-    orientation: IPrintOrientation;
-    printColorConfiguration: IPrintColorConfiguration;
+    copiesPerJob?: number;
+    orientation?: IPrintOrientation;
+    colorMode?: IPrintColorConfiguration;
 }
 
 export interface IPrinterShare {
@@ -38,16 +38,16 @@ export interface IPrintJobStatus {
 
 export interface IDocumentConfiguration {
     orientation?: IPrintOrientation;
-    copies: number;
-    colorConfiguration?: IPrintColorConfiguration;
+    copies?: number;
+    colorMode?: IPrintColorConfiguration;
 }
 
 export interface IPrintDocument {
-    id?: string;
-    name?: string;
-    mimeType?: string;
-    sizeInBytes?: number;
-    documentConfiguration: IDocumentConfiguration;
+    id: string;
+    displayName: string;
+    contentType: string;
+    size: number;
+    configuration: IDocumentConfiguration;
 }
 
 export interface IPrintJob {
@@ -58,8 +58,8 @@ export interface IPrintJob {
 }
 
 export type IIntegerRange = {
-    'minimum': number;
-    'maximum': number;
+    'start': number;
+    'end': number;
 };
 
 export type IPrintOrientation = 'landscape' | 'portrait' | 'reverseLandscape' | 'reversePortrait';

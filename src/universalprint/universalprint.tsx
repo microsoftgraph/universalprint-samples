@@ -6,7 +6,7 @@ import './universalprint.css';
 import { Fabric, Modal, Dropdown, IDropdownOption, DefaultButton, IButtonStyles, IconButton, initializeIcons, SpinnerSize, Spinner, SpinButton, Stack, Label } from '@fluentui/react';
 import { iconButtonStyles, cancelIcon, stackTokens, dropdownStyles, settingsGap, spinStyles, settingStyles } from './universalprintStyles';
 import { IPrinterShare } from '../graph/graphModel';
-import { initialState, StaticPrintSettings, SubmitPrintJob, initilizePrintSettings, onChangeState, convertToSelectedConfig, convertToPrinterSettings } from "./universalprintUtil"
+import { initialState, SubmitPrintJob, initilizePrintSettings, onChangeState, convertToSelectedConfig, convertToPrinterSettings } from "./universalprintUtil"
 import { PrintingState, IPrintSettingsState, Action, IPrintProps } from "./universalprintModel"
 
 // Initialize icons
@@ -19,8 +19,7 @@ export const UniversalPrint: React.FunctionComponent<IPrintProps> = ({ authToken
 
     React.useEffect(() => {
         if (state === PrintingState.initilization) {
-            // initilizePrintSettings(authToken, dispatch);
-            dispatch({ action: Action.ChangePrintSettings, value: StaticPrintSettings });
+            initilizePrintSettings(authToken, dispatch);
         }
     }, [state, authToken]);
 
@@ -40,7 +39,7 @@ export const UniversalPrint: React.FunctionComponent<IPrintProps> = ({ authToken
         if (selectedData.file && selectedData.printer && error === undefined) {
             SubmitPrintJob(selectedData, authToken, dispatch);
         } else {
-            dispatch({ action: Action.UpdateError, value: "Select a file to be printed" });
+            dispatch({ action: Action.UpdateError, value: "select a xps type file for printing" });
         }
     }
 
@@ -91,23 +90,23 @@ export const UniversalPrint: React.FunctionComponent<IPrintProps> = ({ authToken
                         <Stack className='stateStack' horizontalAlign="space-around" verticalAlign='start' tokens={stackTokens}>
                             {error && <Label className='error'> {error} </Label>}
 
-                            <Dropdown selectedKey={selectedData.printer} label='Printer' /* onChange={onPrinterOptionsChange} */ options={printers} styles={dropdownStyles} />
+                            <Dropdown selectedKey={selectedData.printer} label='Printer' onChange={onPrinterOptionsChange} options={printers} styles={dropdownStyles} />
 
                             <Stack>
                                 <Label required={true}>File: </Label>
-                                <input type='file' onChange={onFileChange} key={selectedData.printer} />
+                                <input type='file' accept=".xps" onChange={onFileChange} key={selectedData.printer} />
                             </Stack>
 
                             <Stack tokens={settingsGap}>
                                 <Label> Job Settings </Label>
-                                {selectedData.copies && <SpinButton styles={spinStyles} value={selectedData.copies.toString(10)} label='Copies' min={settings.copies?.minimum} max={settings.copies?.maximum} step={1} onValidate={onCopiesChange} />}
+                                {selectedData.copies && <SpinButton styles={spinStyles} value={selectedData.copies.toString(10)} label='Copies' min={settings.copies?.start} max={settings.copies?.end} step={1} onValidate={onCopiesChange} />}
                                 {settings.orientationOptions && <Dropdown selectedKey={selectedData.orientation} label='Orientation' options={settings.orientationOptions} styles={settingStyles} onChange={onOrientationChange} />}
                                 {settings.colorConfigOptions && <Dropdown defaultSelectedKey={selectedData.colorConfig} label='Color' options={settings.colorConfigOptions} styles={settingStyles} onChange={onColorConfigChange} />}
                             </Stack>
 
                             <Stack horizontal horizontalAlign='end'>
                                 <DefaultButton className="button" onClick={onClose}> Cancel </DefaultButton>
-                                <DefaultButton styles={{ root: { marginRight: 0 } } as IButtonStyles} /* onClick={onSubmit} */> Print </DefaultButton>
+                                <DefaultButton styles={{ root: { marginRight: 0 } } as IButtonStyles} onClick={onSubmit} > Print </DefaultButton>
                             </Stack>
                         </Stack>
                     )}
