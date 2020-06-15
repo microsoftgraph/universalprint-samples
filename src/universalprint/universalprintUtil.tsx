@@ -2,7 +2,7 @@
 // Licensed under the MIT license. 
 
 import { IDropdownOption } from "@fluentui/react";
-import { IPrinterCapabilities, IPrinterDefaults, IDocumentConfiguration, IPrintOrientation, IPrintColorConfiguration, IIntegerRange, IPrinterShare } from "../graph/graphModel";
+import { IPrinterCapabilities, IPrinterDefaults, IDocumentConfiguration, IPrintOrientation, IPrintColorConfiguration, IPrinterShare } from "../graph/graphModel";
 import { IPrinterSettings, ISelectedConfig, IPrintSettingsState, PrintingState, IChangeEvent, Action } from "./universalprintModel";
 import { getPrinterShares, createJob, uploadData, startPrintJob } from "../graph/graphUtil";
 
@@ -94,9 +94,8 @@ export const onChangeState = (prevState: IPrintSettingsState, { action, value }:
     }
     else if (action === Action.ChangeFile) {
         const file = value as File;
-        console.log(file.name);
-        if (!file.name.endsWith('oxps')) {
-            return { ...prevState, selectedData: { ...prevState.selectedData, file: value as File }, error: "select a oxps type file for printing" };
+        if (!file.name.endsWith('xps')) {
+            return { ...prevState, error: "select a xps type file for printing" };
         }
         else {
             return { ...prevState, selectedData: { ...prevState.selectedData, file: value as File }, error: undefined };
@@ -124,23 +123,6 @@ export const errorPrintSettingsState: IPrintSettingsState = {
     printers: []
 };
 
-export const StaticPrintSettings: IPrintSettingsState = {
-    printingState: PrintingState.configuration,
-    printers: [{ key: "printer1", text: 'printer1' },
-    { key: 'printer2', text: 'printer2' }] as IDropdownOption[],
-    settings: {
-        copies: { minimum: 1, maximum: 100 } as IIntegerRange,
-        orientationOptions: [{ key: 'portrait', text: 'portrait' }, { key: 'landscape', text: 'landscape' }] as IDropdownOption[],
-        colorConfigOptions: [{ key: 'greyscale', text: 'greyscale' }, { key: 'color', text: 'color' }] as IDropdownOption[]
-    } as IPrinterSettings,
-    selectedData: {
-        printer: 'printer1',
-        copies: 1,
-        orientation: 'portrait',
-        colorConfig: 'greyscale'
-    }
-};
-
 /**
  * Creates Print dialog options from the Printer Capabilities
  * @param capabilities Printer capabilities
@@ -149,17 +131,17 @@ export const convertToPrinterSettings = (capabilities: IPrinterCapabilities | un
 
     const printerOptions: IPrinterSettings = {}
 
-    if (capabilities && capabilities.supportedCopiesPerJob) {
-        printerOptions.copies = capabilities.supportedCopiesPerJob;
+    if (capabilities && capabilities.copiesPerJob) {
+        printerOptions.copies = capabilities.copiesPerJob;
     }
 
-    if (capabilities && capabilities.supportedOrientations.length) {
-        printerOptions.orientationOptions = capabilities.supportedOrientations.map((orientation: string) => (
+    if (capabilities && capabilities.orientations && capabilities.orientations.length) {
+        printerOptions.orientationOptions = capabilities.orientations.map((orientation: string) => (
             { key: orientation, text: orientation } as IDropdownOption));
     }
 
-    if (capabilities && capabilities.supportedColorConfigurations.length) {
-        printerOptions.colorConfigOptions = capabilities.supportedColorConfigurations.map((colorConfig: string) => (
+    if (capabilities && capabilities.colorModes && capabilities.colorModes.length) {
+        printerOptions.colorConfigOptions = capabilities.colorModes.map((colorConfig: string) => (
             { key: colorConfig, text: colorConfig } as IDropdownOption));
     }
 
@@ -184,7 +166,7 @@ export const convertToSelectedConfig = (printerId: string, defaults: IPrinterDef
         printer: printerId,
         copies: defaults.copiesPerJob,
         orientation: defaults.orientation as string,
-        colorConfig: defaults.printColorConfiguration as string
+        colorConfig: defaults.colorMode as string
     };
 
     return ret;
@@ -204,7 +186,7 @@ export const convertToDocumentConfig = (selData: ISelectedConfig): IDocumentConf
     }
 
     if (selData.colorConfig) {
-        documentConfig.colorConfiguration = selData.colorConfig as IPrintColorConfiguration;
+        documentConfig.colorMode = selData.colorConfig as IPrintColorConfiguration;
     }
 
     return documentConfig;

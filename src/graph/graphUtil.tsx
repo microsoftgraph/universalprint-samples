@@ -32,10 +32,10 @@ export const createJob = async (printerId: string, sizeInBytes: number, document
     let url = `${hostUrl}/print/shares/${printerId}/jobs`;
 
     const printDocument = {
-        name: 'test',
-        mimeType: 'application/oxps',
-        sizeInBytes: sizeInBytes,
-        documentConfiguration: documentConfig
+        displayName: 'test',
+        contentType: 'application/oxps',
+        size: sizeInBytes,
+        configuration: documentConfig
     } as IPrintDocument;
 
     const printJob = {

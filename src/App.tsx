@@ -16,7 +16,6 @@ const App: React.FunctionComponent<{}> = () => {
   const onSignIn = async () => {
     try {
       const loginResp = await login();
-      console.log(loginResp.uniqueId);
       setAuthToken(loginResp.accessToken);
       setUser(loginResp.account.userName);
     } catch (error) {
