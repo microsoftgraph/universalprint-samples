@@ -13,11 +13,11 @@ Before using this sample, you need to onboard to [`universal print`](https://aka
 
 ## Additional Details
 This code sample demonstrates
-1. Registering Printer
+1. Registering [Printer](https://docs.microsoft.com/en-us/graph/api/resources/printer?view=graph-rest-1.0)
 2. Creating [Task Definitions](https://docs.microsoft.com/en-us/graph/api/resources/printtaskdefinition?view=graph-rest-1.0)
 3. Creating [Subscription](https://docs.microsoft.com/en-us/graph/api/resources/subscription?view=graph-rest-1.0) to the Task Definition
 4. Creating [Task Triggers](https://docs.microsoft.com/en-us/graph/api/resources/printtasktrigger?view=graph-rest-1.0)
-5. Getting a print Job and reading the job attributes
+5. Getting a [print Job](https://docs.microsoft.com/en-us/graph/api/resources/printjob?view=graph-rest-1.0) and reading the job attributes
 6. Updating the "Color" attribute to "GrayScale"
 7. Completing the [Task](https://docs.microsoft.com/en-us/graph/api/resources/printtask?view=graph-rest-1.0).
 
