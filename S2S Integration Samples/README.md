@@ -13,18 +13,18 @@ Before using this sample, you need to onboard to [`universal print`](https://aka
 
 ## Additional Details
 This code sample demonstrates
-1. Printer Registration
-2. Creating Task Definitions
-3. Creating Subscription to the Task Definition
-4. Creating Task Triggers
+1. Registering Printer
+2. Creating [Task Definitions](https://docs.microsoft.com/en-us/graph/api/resources/printtaskdefinition?view=graph-rest-1.0)
+3. Creating [Subscription](https://docs.microsoft.com/en-us/graph/api/resources/subscription?view=graph-rest-1.0) to the Task Definition
+4. Creating [Task Triggers](https://docs.microsoft.com/en-us/graph/api/resources/printtasktrigger?view=graph-rest-1.0)
 5. Getting a print Job and reading the job attributes
 6. Updating the "Color" attribute to "GrayScale"
-7. Completing the Task.
+7. Completing the [Task](https://docs.microsoft.com/en-us/graph/api/resources/printtask?view=graph-rest-1.0).
 
 The samples are split two solutions(.sln): S2SIntegration_CreateGraphEntities.sln and S2SIntegration_ProcessPrintTask.sln
 
 S2SIntegration_CreateGraphEntities is used for
-- Printer Registration
+- Registering Printer
 - Creating Task Definitions
 - Creating Subscription to the Task Definition
 - Renewing Subscription to the Task Definition
