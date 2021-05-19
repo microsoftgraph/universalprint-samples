@@ -11,7 +11,7 @@ namespace S2SIntegration_CreateGraphEntities
         public const string ClientId = "";
         public const string ClientSecret = "";
 
-        public const string PrinterNameFormat = "BUILD2021_{0}";
+        public const string PrinterNameFormat = "DemoPrinter_{0}";
 
         public const string ClientState = "9864d2d6-4fa1-40ab-84d9-23093addb340";
         public const int SubscriptionLifetimeInMinutes = 4230; // ~3 days. This is the maximum time that a subscription can persist before it gets deleted.
