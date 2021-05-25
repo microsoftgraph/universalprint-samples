@@ -49,5 +49,5 @@ S2SIntegration_ProcessPrintTask is used for
 
 ## Resources
 
-Code sample to generate a [Certificate Signing Request](https://docs.microsoft.com/en-us/universal-print/hardware/universal-print-oem-certificate-signing-request) with the BouncyCastle C# library.
-[Application scopes](https://docs.microsoft.com/en-us/graph/permissions-reference#universal-print-permissions).
+1. Code sample to generate a [Certificate Signing Request](https://docs.microsoft.com/en-us/universal-print/hardware/universal-print-oem-certificate-signing-request) with the BouncyCastle C# library.
+2. [Application scopes](https://docs.microsoft.com/en-us/graph/permissions-reference#universal-print-permissions).
