@@ -30,8 +30,8 @@ This code sample demonstrates
 7. Updating the job's "Color" attribute to "GrayScale".
 8. Completing the Task.
 
-### The samples are split into two solutions(.sln):
-1. S2SIntegration_CreateGraphEntities.sln
+The samples are split into two solutions(.sln):
+1. S2SIntegration_CreateGraphEntities.
 2. S2SIntegration_ProcessPrintTask.sln
 
 S2SIntegration_CreateGraphEntities is used for
@@ -50,4 +50,4 @@ S2SIntegration_ProcessPrintTask is used for
 ## Resources
 
 Code sample to generate a [Certificate Signing Request](https://docs.microsoft.com/en-us/universal-print/hardware/universal-print-oem-certificate-signing-request) with the BouncyCastle C# library.
-[Application scopes](https://docs.microsoft.com/en-us/graph/permissions-reference#universal-print-permissions)
+[Application scopes](https://docs.microsoft.com/en-us/graph/permissions-reference#universal-print-permissions).
