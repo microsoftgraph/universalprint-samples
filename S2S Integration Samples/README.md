@@ -12,7 +12,7 @@ Build and run this sample to intercept all jobs for a newly registered Universal
 - App is already provisioned in the Azure AD tenant under which printer and print jobs need to be accessed.
 
 ## Build Instructions
-1. Open the solution in Visual Studio and hit 'Restore Nuget Packages'.
+1. Open the solution in VS 2019 (recommended) or VS 2017 and hit 'Restore Nuget Packages'.
 2. Use Visual Studio to build the project.
 
 ## Details
